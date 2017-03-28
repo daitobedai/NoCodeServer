@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.daitobedai.nocode.dao.SomethingBad">
+    <resultMap id="badUrlMap" type="com.daitobedai.nocode.domain.badUrl">
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getUrl" resultMap="badUrlMap">
+        SELECT title,url FROM somethingBad
+    </select>
+</mapper>
