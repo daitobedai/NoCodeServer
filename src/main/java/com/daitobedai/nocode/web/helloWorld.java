@@ -1,4 +1,4 @@
-package com.daitobedai.nocode;
+package com.daitobedai.nocode.web;
 
 import com.daitobedai.nocode.dao.SomethingBad;
 import com.daitobedai.nocode.domain.badUrl;
