@@ -7,7 +7,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     url: jdbc:mysql://127.0.0.1:3306/dai_site
     username: root
-    password: j9BBZdmTP7+V7/zHbyAMMGxUfPPdTIR0JafYTj63toIU7vmhJFHmn2WYMycH4lfL2uGVsoNueY2Mx3MTkj2nzA==
+    password: Wka2rbJWL0Sk4MQHxPem+KTnjSZUFBoBnN9+wJwHjAaL/IJ/P3DiO48WsbYhm47vz7fxvXykFaENxw+LYFwHdw==
     driver-class-name: com.mysql.jdbc.Driver
     minIdle: 5
     maxActive: 50
