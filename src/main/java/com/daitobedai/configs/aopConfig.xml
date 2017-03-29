@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd   
+
+
+
+
+            http://www.springframework.org/schema/tx    
+            http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!-- SUPPORTS 表示当前执行的方法如果不在事务内，不会新建事务 -->
+            <tx:method name="get*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="count*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="find*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="list*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="fetch*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="extract*" propagation="SUPPORTS" read-only="true"/>
+
+            <!-- REQUIRED 表示当前执行的方法如果不在事务内，会新建事务；如果已经在事务内，会共享当前的事务而不会创建新的事务；即任何地方失败都会导致当前事务事务回滚-->
+            <tx:method name="save*" propagation="REQUIRED"/>
+            <tx:method name="add*" propagation="REQUIRED"/>
+            <tx:method name="edit*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="del*" propagation="REQUIRED"/>
+            <tx:method name="create*" propagation="REQUIRED"/>
+            <tx:method name="insert*" propagation="REQUIRED"/>
+            <tx:method name="merge*" propagation="REQUIRED"/>
+            <tx:method name="remove*" propagation="REQUIRED"/>
+            <tx:method name="put*" propagation="REQUIRED"/>
+            <tx:method name="build*" propagation="REQUIRED"/>
+
+            <tx:method name="log*" propagation="REQUIRES_NEW"/>
+            <!-- REQUIRES_NEW 表示当前执行的方法如果不在事务内，会新建事务；
+                                    如果已经在事务内，会挂起当前事务，创建新的嵌套事务；
+                                    应用场景：方法内部有个往数据库写日志的被调用方法，这时候外部方法失败了外部事务回滚也要让内部写日志这方法不回滚 -->
+        </tx:attributes>
+    </tx:advice>
+</beans>

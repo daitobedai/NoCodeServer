@@ -10,9 +10,12 @@ import org.springframework.boot.bind.RelaxedPropertyResolver;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.io.IOException;
@@ -23,6 +26,7 @@ import java.util.List;
 
 @Configuration
 @EnableTransactionManagement
+@ImportResource("classpath:/com/daitobedai/configs/aopConfig.xml")
 public class MyBaitsConfig implements EnvironmentAware {
     private RelaxedPropertyResolver propertyResolver;
 
@@ -53,6 +57,11 @@ public class MyBaitsConfig implements EnvironmentAware {
 //    private void setTypeAliasesPackage(SqlSessionFactoryBean sqlSessionFactoryBean){
 //        sqlSessionFactoryBean.setTypeAliasesPackage("com.daitobedai.nocode.domain");
 //    }
+
+    @Bean("transactionManager")
+    public PlatformTransactionManager transactionManager() throws SQLException {
+        return new DataSourceTransactionManager(getDruidDataSourceInstance());
+    }
 
     // 注册dataSource
     @Bean(name = "dataSource", initMethod = "init", destroyMethod = "close")
