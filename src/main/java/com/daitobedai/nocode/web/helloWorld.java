@@ -18,8 +18,8 @@ public class helloWorld {
     @RequestMapping(method = RequestMethod.GET)
     public
     @ResponseBody
-    List<badUrl> home() {
-        List<badUrl> strings = somethingBad.getUrl();
+    List<badUrl> home(@RequestParam(value = "text",required = false) String text) {
+        List<badUrl> strings = somethingBad.getUrl(text);
         return strings;
     }
 

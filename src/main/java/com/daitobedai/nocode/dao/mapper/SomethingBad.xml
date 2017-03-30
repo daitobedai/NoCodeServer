@@ -8,5 +8,10 @@
 
     <select id="getUrl" resultMap="badUrlMap">
         SELECT title,url FROM somethingBad
+        <where>
+            <if test="text != null">
+                title like CONCAT('%', #{text}, '%')
+            </if>
+        </where>
     </select>
 </mapper>
